@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Building Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .sensor, .device {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .status-on {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-off {
+            color: red;
+            font-weight: bold;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Smart Building Management System</h1>
+
+    <div class="sensor">
+        <h3>Temperature Sensor</h3>
+        <label>Temperature:</label>
+        <span id="temperature">25</span> °C
+        <br>
+        <input type="range" id="tempSlider" min="15" max="40" value="25">
+    </div>
+
+    <div class="sensor">
+        <h3>Motion Sensor</h3>
+        <label>Motion:</label>
+        <span id="motionStatus" class="status-off">No Motion</span><br>
+        <button onclick="toggleMotion()">Toggle Motion</button>
+    </div>
+
+    <div class="device">
+        <h3>Light Control</h3>
+        <label>Light:</label>
+        <span id="lightStatus" class="status-off">OFF</span><br>
+        <button onclick="toggleLight()">Toggle Light</button>
+    </div>
+
+    <div class="device">
+        <h3>Fan Control</h3>
+        <label>Fan:</label>
+        <span id="fanStatus" class="status-off">OFF</span><br>
+        <button onclick="toggleFan()">Toggle Fan</button>
+    </div>
+
+    <script>
+        let temperature = 25;
+        let motion = false;
+        let light = false;
+        let fan = false;
+
+        const tempSlider = document.getElementById("tempSlider");
+        const tempDisplay = document.getElementById("temperature");
+        const motionDisplay = document.getElementById("motionStatus");
+        const lightDisplay = document.getElementById("lightStatus");
+        const fanDisplay = document.getElementById("fanStatus");
+
+        tempSlider.oninput = function() {
+            temperature = this.value;
+            tempDisplay.textContent = temperature;
+        }
+
+        function toggleMotion() {
+            motion = !motion;
+            motionDisplay.textContent = motion ? "Motion Detected" : "No Motion";
+            motionDisplay.className = motion ? "status-on" : "status-off";
+        }
+
+        function toggleLight() {
+            light = !light;
+            lightDisplay.textContent = light ? "ON" : "OFF";
+            lightDisplay.className = light ? "status-on" : "status-off";
+        }
+
+        function toggleFan() {
+            fan = !fan;
+            fanDisplay.textContent = fan ? "ON" : "OFF";
+            fanDisplay.className = fan ? "status-on" : "status-off";
+        }
+    </script>
+
+</body>
+</html>
